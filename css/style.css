@@ -551,24 +551,32 @@ margin-right:20px;
   }
 
   /* スマホ用メニュー：不透明度を1にして後ろを隠す */
-  #nav-sp {
-    display: none;
-    position: fixed;
+#nav-sp {
+    display: flex !important;   /* 強制表示 */
+    position: fixed;            /* 画面全体に固定 */
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: #cbb8a5; /* ここを1.0にすると完全に透けなくなります */
+    background-color: #cbb8a5; /* image_2.pngのような背景色 */
     z-index: 999;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;     /* 縦並び */
+    justify-content: center;    /* 上下の中央 */
+    align-items: center;        /* 左右の中央 */
+    
+    /* アニメーション用設定 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
   }
 
+  /* 2. activeクラスがついた時だけ表示させる */
   #nav-sp.active {
-    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
+  /* 3. 背後のコンテンツを隠す設定は維持 */
   #nav-sp.active ~ .hero .hero-content {
     display: none;
   }
